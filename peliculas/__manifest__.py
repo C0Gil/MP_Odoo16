@@ -6,10 +6,12 @@
     'depends': ['base'],
     'author': 'Gilberto C. O.',
     'category': 'Peliculas',
+    'website': 'http://www.google.com',
     'summary': 'Modulo de presupuestos para peliculas',
     'description': '''
       Modulo para hacer presupuestos de peliculas
-    ''',
-    'website': 'http://www.google.com',
-    'data': [],
+    ''',    
+    'data': [
+      'views/menu.xml'
+    ],
 }
