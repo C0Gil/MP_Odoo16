@@ -41,7 +41,11 @@ class Presupuesto(models.Model):
     categoria_director = fields.Many2one(
         comodel_name="res.partner.category",
         string="Categoria Director",
-        default=lambda self: self.env['res.partner.category'].search([('name', '=', 'Director')])
+        #Segunda version
+        default=lambda self: self.env.ref('peliculas.category_director')
+
+        #Primera version
+        #default=lambda self: self.env['res.partner.category'].search([('name', '=', 'Director')])
 
     )
     genero_ids = fields.Many2many(
@@ -61,6 +65,7 @@ class Presupuesto(models.Model):
     ], default='borrador', string='Estados', copy=False)
 
     fch_aprobado = fields.Datetime(string='Fecha aprobado', copy=False)
+    num_presupuesto = fields.Char(string='Numero presupuesto', copy=False)
 
     def aprobar_presupuesto(self):
         logger.info('+----------------Log info----------------+')       
@@ -75,13 +80,17 @@ class Presupuesto(models.Model):
 
     def unlink(self):
         logger.info('+----------------Se disparo la funcion unlink----------------+')
-        if self.state != 'cancelado':
-            raise UserError('Un registro necesita estar cancelado para ser eliminado')
-        super(Presupuesto, self).unlink()
+        for record in self:
+            if record.state != 'cancelado':
+                raise UserError('Un registro necesita estar cancelado para ser eliminado')
+            super(Presupuesto, record).unlink()
 
     @api.model
     def create(self, variables):
         logger.info('+----------------Variable: {0}'.format(variables))
+        sequence_obj = self.env['ir.sequence']
+        correlativo = sequence_obj.next_by_code('secuencia.presupuesto.pelicula')
+        variables['num_presupuesto'] = correlativo
         return super(Presupuesto, self).create(variables)
         
     def write(self, variables):

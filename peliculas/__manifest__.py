@@ -15,6 +15,8 @@
       Modulo para hacer presupuestos de peliculas
     ''',    
     'data': [
+      'data/secuencia.xml',
+      'data/categoria.xml',
       'views/presupuesto_view.xml',
       'views/menu.xml'
     ],
