@@ -51,9 +51,7 @@
                         <group>
                             <field name="director_id" domain="[('category_id', 'in', [categoria_director])]" options="{'no_create': True}"/>
                             <field name="categoria_director" invisible="1"/>
-                            <field name="link_trailer" widget="url" />
-                            <field name="fch_aprobado" readonly="1"/>
-                            <field name="num_presupuesto" readonly="1"/>
+                            <field name="link_trailer" widget="url" />                                                    
                         </group>
                         <group>
                             <field name="es_libro" widget="boolean_toggle"/>
@@ -63,6 +61,34 @@
                         </group>
                     </group>
 
+                    <separator string="Detalles">
+
+                    </separator>
+
+                    <notebook>
+                        <page string="Presupuesto">
+                            <group>
+                                <group>
+                                    <field name="fch_aprobado" readonly="1"/>
+                                    <field name="fch_creacion" readonly="1"/>
+                                    <field name="num_presupuesto" readonly="1"/>
+                                </group>
+                                <group>
+                                    
+                                </group>                               
+                            </group>
+                        </page>
+
+                        <page string="Otra informacion">
+                            <group>
+                                <group>
+                                    <field name="actor_ids" domain="[('category_id', 'in', [categoria_actor])]" widget="many2many_tags"/>
+                                    <field name="categoria_actor" invisible="1"/>
+                                    <field name="opinion"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>

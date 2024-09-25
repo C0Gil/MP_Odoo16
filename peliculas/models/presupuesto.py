@@ -48,6 +48,18 @@ class Presupuesto(models.Model):
         #default=lambda self: self.env['res.partner.category'].search([('name', '=', 'Director')])
 
     )
+    
+    actor_ids = fields.Many2many(
+        comodel_name='res.partner',
+        string="Actores"
+    )
+
+    categoria_actor = fields.Many2one(
+        comodel_name="res.partner.category",
+        string="Categoria Actor",
+        default=lambda self: self.env.ref('peliculas.category_actor')
+    )
+
     genero_ids = fields.Many2many(
         comodel_name='genero',
         string='Genero'
@@ -66,6 +78,8 @@ class Presupuesto(models.Model):
 
     fch_aprobado = fields.Datetime(string='Fecha aprobado', copy=False)
     num_presupuesto = fields.Char(string='Numero presupuesto', copy=False)
+    fch_creacion = fields.Datetime(string='Fecha de creacion', copy=False, default=lambda self: fields.Datetime.now())
+    opinion = fields.Html(string='Opinion')
 
     def aprobar_presupuesto(self):
         logger.info('+----------------Log info----------------+')       
@@ -120,5 +134,5 @@ class Presupuesto(models.Model):
                 self.dsc_clasificacion = 'Mayores de 18'
         else:
             self.dsc_clasificacion = False
-            
-        
+
+    
