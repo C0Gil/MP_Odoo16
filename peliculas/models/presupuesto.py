@@ -1,6 +1,10 @@
 # -*- coding:utf-8 -*-
 
+#import logging
+
 from odoo import fields, models, api
+
+#logger = logging.getLogger(__name__)
 
 class Presupuesto(models.Model):
     _name = 'presupuesto'
@@ -47,3 +51,24 @@ class Presupuesto(models.Model):
     es_libro = fields.Boolean(string='Version Libro')
     libro = fields.Binary(string='Libro')
     libro_filename = fields.Char(string='Nombre del libro')
+
+    state = fields.Selection(selection=[
+        ('borrador', 'Borrador'),
+        ('aprobado', 'Aprobado'),
+        ('cancelado', 'Cancelado'),
+    ], default='borrador', string='Estados', copy=False)
+
+    fch_aprobado = fields.Datetime(string='Fecha aprobado', copy=False)
+
+    def aprobar_presupuesto(self):
+       #logger.info('Log info') 
+       #logger.warning('Log warning') 
+       #logger.error('Log error')
+        self.state = 'aprobado'  
+        self.fch_aprobado = fields.Datetime.now()   
+
+    def cancelar_presupuesto(self):
+        self.state = 'cancelado'
+
+    def borrador_presupuesto(self):
+        self.state = 'borrador'    
