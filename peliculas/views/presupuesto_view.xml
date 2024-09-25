@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <record id="view_preuspuesto_form" model="ir.ui.view">
+        <field name="name">Vista formulario Presupuesto de Peliculas</field>
+        <field name="model">presupuesto</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <widget name="web_ribbon" title="Archivado" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                    <field name="image_1920" widget="image" class="oe_avatar" option="{'preview_image': 'image_128', 'size':['',128] }"/>
+
+                    <div class="oe_title">  
+                        <div class="o_row">
+                            <field name="active" invisible="1"/>
+                            <!--<field name="state" invisible="1"/>-->
+                            <h1 style="display: flex;">
+                                <field name="name" placeholder="Nombre de la pelicula" required="1" default_focus="1" class="oe_inline"/> 
+                                <field name="puntuacion" widget="percentpie" style="font-size: 12px;" />
+                                <field name="puntuacion2" placeholder="Puntuacion de usuario" class="oe_inline" /> <!--attrs="{'invisible': [('state', '=', 'readonly')]}"-->
+                            </h1>
+                        </div>
+                    </div>
+
+                    <div class="o_row" style="display: flex;">
+                        <field name="clasificacion" required="1"/>
+                        <span class="fa fa-circle" attrs="{'invisible': [('clasificacion', '=', False), ('fch_estreno', '=', False)]}" style="font-size: 8px" />
+                        <field name="fch_estreno"/>
+                        
+                        <!--<field name=""/>-->
+                    </div>
+
+                    <div class="o_row">
+                        <field name="genero_ids" widget="many2many_tags"/>
+                    </div>
+
+                    <group string="Datos Principales">
+                        <field name="vista_general" placeholder="Vista General ... "/>
+                        <group>
+                            <field name="director_id" domain="[('category_id', 'in', [categoria_director])]" options="{'no_create': True}"/>
+                            <field name="categoria_director" invisible="1"/>
+                            <field name="link_trailer" widget="url" />
+                        </group>
+                        <group>
+                            <field name="es_libro" widget="boolean_toggle"/>
+                            <field name="libro" filename="libro_filename" attrs="{'invisible': [('es_libro','=',False)]}"/>
+                            <field name="libro_filename" invisible="1"/>
+                        </group>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

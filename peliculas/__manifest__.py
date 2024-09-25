@@ -3,7 +3,10 @@
 {
     'name': 'Modulo de peliculas',
     'version': '1.0',
-    'depends': ['base'],
+    'depends': [
+      'contacts',
+
+      ],
     'author': 'Gilberto C. O.',
     'category': 'Peliculas',
     'website': 'http://www.google.com',
@@ -12,6 +15,7 @@
       Modulo para hacer presupuestos de peliculas
     ''',    
     'data': [
+      'views/presupuesto_view.xml',
       'views/menu.xml'
     ],
 }
