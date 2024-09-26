@@ -21,12 +21,12 @@
                     <widget name="web_ribbon" title="Archivado" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
                     <field name="image_1920" widget="image" class="oe_avatar" option="{'preview_image': 'image_128', 'size':['',128] }"/>
 
-                    <div class="oe_title">  
+                    <div class="oe_title">
                         <div class="o_row">
                             <field name="active" invisible="1"/>
                             <!--<field name="state" invisible="1"/>-->
                             <h1 style="display: flex;">
-                                <field name="name" placeholder="Nombre de la pelicula" required="1" default_focus="1" class="oe_inline"/> 
+                                <field name="name" placeholder="Nombre de la pelicula" required="1" default_focus="1" class="oe_inline"/>
                                 <field name="puntuacion" widget="percentpie" style="font-size: 12px;" />
                                 <field name="puntuacion2" placeholder="Puntuacion de usuario" class="oe_inline" states="borrador"/>
                             </h1>
@@ -37,9 +37,9 @@
                         <field name="clasificacion" required="1"/>
                         <span class="fa fa-circle" title="Circle icon" attrs="{'invisible': [('clasificacion', '=', False), ('fch_estreno', '=', False)]}" style="font-size: 8px" />
                         <field name="fch_estreno"/>
-                        
+
                         <!--<field name=""/>-->
-                        
+
                     </div>
 
                     <div class="o_row">
@@ -51,13 +51,13 @@
                         <group>
                             <field name="director_id" domain="[('category_id', 'in', [categoria_director])]" options="{'no_create': True}"/>
                             <field name="categoria_director" invisible="1"/>
-                            <field name="link_trailer" widget="url" />                                                    
+                            <field name="link_trailer" widget="url" />
                         </group>
                         <group>
                             <field name="es_libro" widget="boolean_toggle"/>
                             <field name="libro" filename="libro_filename" attrs="{'invisible': [('es_libro','=',False)]}"/>
                             <field name="libro_filename" invisible="1"/>
-                            
+
                         </group>
                     </group>
 
@@ -76,7 +76,7 @@
                                 <group>
                                     <field name="currency_id"/>
                                     <field name="campos_ocultos" widget="boolean_toggle"/>
-                                </group>                               
+                                </group>
                             </group>
 
                             <field name="detalle_ids">
@@ -84,16 +84,43 @@
                                     <control>
                                         <create name="add_product_control" string="Agregar recurso cinematografico"/>
                                     </control>
-                                    <field name="image" widget="image" options="{'size': [80, 50]}" optional="show"/> 
-                                    <field name="name"/> 
-                                    <field name="descripcion" optional="show"/>                                    
-                                    <field name="contacto_id" attrs="{'column_invisible': [('parent.campos_ocultos', '=', False)]}"/> 
-                                    <field name="cantidad"/> 
-                                    <field name="precio"/> 
+                                    <field name="image" widget="image" options="{'size': [80, 50]}" optional="show"/>
+                                    <field name="name"/>
+                                    <field name="descripcion" optional="show"/>
+                                    <field name="contacto_id" attrs="{'column_invisible': [('parent.campos_ocultos', '=', False)]}"/>
+                                    <field name="cantidad"/>
+                                    <field name="precio"/>
                                     <field name="importe" readonly="1" force_save="1"/>
                                     <field name="currency_id" invisible="1"/>
                                 </tree>
                             </field>
+
+                            <div class="mt-2 mt-md-0 container">
+                                <div class="row">
+
+                                    <div class="col-8">
+                                        <field name="terminos" nolabel="1" placeholder="terminos y condiciones"/>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <div class="p-0 m-0 ">
+                                            <p class="d-inline"><strong>Importe total:  </strong></p> 
+                                            <field name="base" widget="monetary" options="{'currency_field': 'currency_id'}" string="Importe total: " class="text-right d-inline"/>
+                                        </div>
+                                        <div class="p-0 m-0 ">
+                                            <p class="d-inline"><strong>IVA:  </strong></p> 
+                                            <field name="impuestos" class="d-inline text-right" string="IVA: "/>
+                                        </div>
+                                        <hr class="p-0 m-0"/>
+                                        <div class="p-0 m-0 ">
+                                            <p class="d-inline"><strong>Total:  </strong></p> 
+                                            <field name="total" widget="monetary" options="{'currency_field': 'currency_id'}" class="d-inline text-right"/>
+                                        </div>                                    
+                                    </div>
+                                    <div class="oe_clear"/>
+
+                                </div>
+                            </div>
                         </page>
 
                         <page string="Otra informacion">
