@@ -104,18 +104,24 @@
 
                                     <div class="col-4">
                                         <div class="p-0 m-0 ">
-                                            <p class="d-inline"><strong>Importe total:  </strong></p> 
+                                            <p class="d-inline">
+                                                <strong>Importe total:  </strong>
+                                            </p>
                                             <field name="base" widget="monetary" options="{'currency_field': 'currency_id'}" string="Importe total: " class="text-right d-inline"/>
                                         </div>
                                         <div class="p-0 m-0 ">
-                                            <p class="d-inline"><strong>IVA:  </strong></p> 
+                                            <p class="d-inline">
+                                                <strong>IVA:  </strong>
+                                            </p>
                                             <field name="impuestos" class="d-inline text-right" string="IVA: "/>
                                         </div>
                                         <hr class="p-0 m-0"/>
                                         <div class="p-0 m-0 ">
-                                            <p class="d-inline"><strong>Total:  </strong></p> 
+                                            <p class="d-inline">
+                                                <strong>Total:  </strong>
+                                            </p>
                                             <field name="total" widget="monetary" options="{'currency_field': 'currency_id'}" class="d-inline text-right"/>
-                                        </div>                                    
+                                        </div>
                                     </div>
                                     <div class="oe_clear"/>
 
@@ -137,4 +143,27 @@
             </form>
         </field>
     </record>
+
+    <record id="view_preuspuesto_tree" model="ir.ui.view">
+        <field name="name">Vista Lista de presupuestos</field>
+        <field name="model">presupuesto</field>
+        <field name="arch" type="xml">
+            <tree decoration-muted="state == 'cancelado'" decoration-success="state == 'aprobado'">
+                <field name="name"/>
+                <field name="num_presupuesto"/>
+                <field name="fch_creacion"/>
+                <field name="total" sum="importe_total"/>
+                <field name="state" widget="badge" decoration-success="state == 'aprobado'" decoration-danger="state == 'cancelado'"/>
+            </tree>
+
+            <!--  decoration-bf: negrita  -->
+            <!--  decoration-it: cursiva  -->
+            <!--  decoration-danger: color rojo  -->
+            <!--  decoration-info: color azul claro  -->
+            <!--  decoration-muted: color gris claro  -->
+            <!--  decoration-success: color verde  -->
+            <!--  decoration-warning: color mostaza  -->
+        </field>
+    </record>
+
 </odoo>
