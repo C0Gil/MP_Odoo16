@@ -5,7 +5,7 @@
     'version': '1.0',
     'depends': [
       'contacts',
-
+      'mail'
       ],
     'author': 'Gilberto C. O.',
     'category': 'Peliculas',
