@@ -10,6 +10,7 @@
                     <field name="state" widget="statusbar" statusbar_visible="borrador,aprobado"/>
                     <button string="Aprobar" type="object" name="aprobar_presupuesto" class="oe_highlight" states="borrador"/>
                     <button string="Cancelar" type="object" name="cancelar_presupuesto" states="borrador,aprobado"/>
+                    <button string="Popup" type="action" name="%(action_open_update_wizard)d" states="aprobado" groups="peliculas.group_pelicula_administrador"/>
                     <button string="Regresar a borrador" type="object" name="borrador_presupuesto" states="cancelado,aprobado"/>
                 </header>
 

@@ -19,6 +19,7 @@
       'security/ir.model.access.csv',
       'data/secuencia.xml',
       'data/categoria.xml',
+      'wizard/update_wizzard_views.xml',
       'views/presupuesto_view.xml',
       'views/menu.xml'
     ],
