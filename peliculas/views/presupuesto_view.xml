@@ -77,7 +77,7 @@
                                 <group>
                                     <field name="currency_id"/>
                                     
-                                    <field name="campos_ocultos" widget="boolean_toggle" groups="peliculas.group_pelicula_administrador"/>
+                                    <field name="campos_ocultos" widget="boolean_toggle" /> <!-- groups="peliculas.group_pelicula_administrador"-->
                                 </group>
                             </group>
 
@@ -89,7 +89,7 @@
                                     <field name="image" widget="image" options="{'size': [80, 50]}" optional="show"/>
                                     <field name="name"/>
                                     <field name="descripcion" optional="show"/>                                    
-                                    <field name="contacto_id" attrs="{'invisible': [('is_guide', '=', True)]}" />
+                                    <field name="contacto_id" attrs="{'column_invisible': [('parent.campos_ocultos', '=', False)]}" />
                                     <field name="is_guide" invisible="1"/>
                                     <field name="cantidad"/>
                                     <field name="precio"/>

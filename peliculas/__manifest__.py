@@ -20,6 +20,7 @@
       'data/secuencia.xml',
       'data/categoria.xml',
       'wizard/update_wizzard_views.xml',
+      'report/reporte_pelicula.xml',
       'views/presupuesto_view.xml',
       'views/menu.xml'
     ],
