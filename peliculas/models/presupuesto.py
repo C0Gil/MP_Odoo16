@@ -29,7 +29,7 @@ class Presupuesto(models.Model):
         ('R', 'R'),
         ('NC-17', 'NC-17'),
     ], string='Clasificacion')
-    
+        
     dsc_clasificacion = fields.Char("Descripcion clasificacion")
     fch_estreno = fields.Date(string='Fecha de Estreno')
     puntuacion = fields.Integer(string='Puntuacion', related="puntuacion2")
@@ -87,7 +87,7 @@ class Presupuesto(models.Model):
         inverse_name = 'presupuesto_id',
         string = 'Detalles'
     )
-    campos_ocultos = fields.Boolean(string="Campos Ocultos")
+    campos_ocultos = fields.Boolean(string="Campos Ocultos", default='False')
     currency_id = fields.Many2one(
         comodel_name ="res.currency",
         string = 'Moneda',
@@ -156,6 +156,16 @@ class Presupuesto(models.Model):
 class PresupuestoDetalle(models.Model):
     _name = "presupuesto.detalle"
     
+    def _compute_is_guide(self):
+        # Obtener el grupo del usuario actual
+        usuario = self.env.user
+        grupo_ref = 'peliculas.group_pelicula_administrador'
+        es_usuario_del_grupo = usuario.has_group(grupo_ref)
+        for record in self:
+            record.is_guide = es_usuario_del_grupo
+    
+    is_guide = fields.Boolean(compute='_compute_is_guide', store=False, string='Tipo de Usuario')
+
     presupuesto_id = fields.Many2one(
         comodel_name = 'presupuesto',
         string = 'Presupuesto'
